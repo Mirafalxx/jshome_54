@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [cubes, setCubes] = useState([]);
+  //
+  const createBoard = () => {
+    const randomIndex = Math.floor(Math.random() * (36 - 0 + 1)) + 0;
+    const tempObj = [];
+    console.log(randomIndex);
+    for (let i = 0; i < 36; i++) {
+      tempObj.push(i);
+    }
+    setCubes([...cubes, ...tempObj]);
+    // console.log(cubes);
+    console.log(tempObj[randomIndex]);
+    // console.log(...tempObj);
+  };
+  if (cubes.length === 0) {
+    createBoard();
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="cubes-board">
+        {cubes.map((elem) => {
+          return <div className="cube" key={elem}></div>;
+        })}
+      </div>
+      <button onClick={createBoard}>reset</button>
     </div>
   );
-}
+};
 
 export default App;
